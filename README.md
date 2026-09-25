@@ -369,56 +369,161 @@ La anomalía `tcp_syn_flood` se encuentra habilitada con acción `Block`, regist
 
 ## Diagramas y evidencias
 
-Esta sección contiene las evidencias visuales utilizadas para documentar la implementación y comprobar el funcionamiento del laboratorio.
+Esta sección contiene las evidencias visuales de las configuraciones y pruebas realizadas durante la implementación del laboratorio.
 
-### Diagrama de la topología
-
-La siguiente imagen representa la topología general implementada en GNS3:
-
-![Topología de red](DIAGRAMAS/Topologia-Red.png)
-
-### Evidencias de configuración y pruebas
-
-Las capturas de pantalla correspondientes a las configuraciones y pruebas realizadas durante el laboratorio se encuentran organizadas en la carpeta:
+Las capturas se encuentran almacenadas en:
 
 `DOCUMENTACION/Imagenes/`
 
-Las evidencias recopiladas permiten comprobar la implementación y funcionamiento de los diferentes componentes de la infraestructura.
+### Evidencia 01 — Topología de red
 
-Entre las evidencias se encuentran:
+Topología general implementada en GNS3 con FortiGate, switch, equipo de usuarios, WEB Server, DB Server y conexión hacia la red externa.
 
-- Topología completa implementada en GNS3.
-- Configuración de la VLAN 10 para usuarios.
-- Configuración de la VLAN 20 para servidores.
-- Asignación de direccionamiento mediante DHCP al equipo Windows.
-- Obtención de la ruta por defecto mediante DHCP en la interfaz WAN del FortiGate.
-- Configuración de NAT y prueba de salida hacia Internet.
-- Política de acceso de Usuarios al WEB Server mediante HTTPS/443.
-- Acceso exitoso al WEB Server mediante HTTPS.
-- Política de bloqueo de Usuarios hacia el DB Server mediante MySQL/3306.
-- Evidencia del bloqueo de la conexión desde Usuarios hacia el DB Server.
-- Comunicación permitida entre WEB Server y DB Server mediante TCP/3306.
-- Bloqueo de puertos no autorizados entre WEB Server y DB Server mediante UFW.
-- Configuración de Deep Packet Inspection (DPI).
-- Registro de tráfico HTTPS procesado mediante inspección SSL.
-- Configuración del perfil IPS `SQL-INJECTION-PROTECTION`.
-- Detección de intentos de SQL Injection mediante la firma `HTTP.URI.SQL.Injection`.
-- Bloqueo y registro de los eventos de SQL Injection.
-- Cuarentena del equipo identificado como origen del tráfico malicioso.
-- Configuración del perfil `BLOCK-EXE-DOWNLOADS`.
-- Evidencia del bloqueo de la descarga de `prueba.exe`.
-- Registro del archivo bloqueado mediante File Filter.
-- Configuración de la política `PROTECCION-DOS-WEB`.
-- Configuración de las VLANs en el switch.
-- Configuración del enlace trunk entre el switch y FortiGate.
-- Configuración y verificación de Port Security.
-- Desactivación administrativa de los puertos no utilizados del switch.
+![Evidencia 01 - Topología](DOCUMENTACION/Imagenes/image01.png)
 
-### Organización de las evidencias
+### Evidencia 02 — Configuración de VLANs en FortiGate
 
-Las imágenes se encuentran numeradas para facilitar su identificación y mantener un orden lógico de acuerdo con el desarrollo del laboratorio.
+Configuración de las interfaces correspondientes a las redes de usuarios y servidores en FortiGate.
 
-Cada evidencia permite relacionar las configuraciones realizadas con las pruebas de funcionamiento correspondientes, facilitando la verificación de los requisitos implementados.
+![Evidencia 02 - VLANs FortiGate](DOCUMENTACION/Imagenes/image02.png)
+
+### Evidencia 03 — Direccionamiento obtenido por el equipo Windows
+
+Configuración IPv4 obtenida por el equipo Windows perteneciente a la VLAN 10 de usuarios.
+
+![Evidencia 03 - Direccionamiento Windows](DOCUMENTACION/Imagenes/image03.png)
+
+### Evidencia 04 — Ruta por defecto
+
+Verificación de la ruta utilizada para proporcionar conectividad hacia la red externa.
+
+![Evidencia 04 - Ruta por defecto](DOCUMENTACION/Imagenes/image04.png)
+
+### Evidencia 05 — Política de NAT
+
+Configuración de la política utilizada para proporcionar salida hacia Internet mediante NAT.
+
+![Evidencia 05 - NAT](DOCUMENTACION/Imagenes/image05.png)
+
+### Evidencia 06 — Prueba de conectividad hacia Internet
+
+Prueba realizada desde un servidor para comprobar la conectividad hacia Internet.
+
+![Evidencia 06 - Internet](DOCUMENTACION/Imagenes/image06.png)
+
+### Evidencia 07 — Política Usuarios → WEB Server
+
+Política de FortiGate que permite la comunicación desde la VLAN de usuarios hacia el WEB Server.
+
+![Evidencia 07 - Usuarios WEB](DOCUMENTACION/Imagenes/image07.png)
+
+### Evidencia 08 — Acceso HTTPS al WEB Server
+
+Acceso al servicio Apache del WEB Server desde el equipo de usuarios.
+
+![Evidencia 08 - HTTPS](DOCUMENTACION/Imagenes/image08.png)
+
+### Evidencia 09 — Prueba del puerto HTTPS/443
+
+Validación de la conectividad desde el equipo Windows hacia el WEB Server mediante TCP/443.
+
+![Evidencia 09 - HTTPS 443](DOCUMENTACION/Imagenes/image09.png)
+
+### Evidencia 10 — Bloqueo Usuarios → DB Server
+
+Prueba de conexión desde el equipo Windows hacia el DB Server mediante TCP/3306, donde se comprueba que el acceso directo se encuentra bloqueado.
+
+![Evidencia 10 - Bloqueo DB](DOCUMENTACION/Imagenes/image10.png)
+
+### Evidencia 11 — Política de bloqueo hacia el DB Server
+
+Política `BLOQUEO-USUARIOS-DB` configurada para impedir el acceso directo de los usuarios al servicio MySQL del DB Server.
+
+![Evidencia 11 - Política DB](DOCUMENTACION/Imagenes/image11.png)
+
+### Evidencia 12 — Comunicación WEB Server → DB Server
+
+Validación de la comunicación permitida desde el WEB Server hacia el DB Server mediante TCP/3306.
+
+![Evidencia 12 - WEB DB 3306](DOCUMENTACION/Imagenes/image12.png)
+
+### Evidencia 13 — Bloqueo de puerto no autorizado
+
+Prueba desde el WEB Server hacia un puerto no autorizado del DB Server, comprobando la restricción aplicada mediante UFW.
+
+![Evidencia 13 - Puerto bloqueado](DOCUMENTACION/Imagenes/image13.png)
+
+### Evidencia 14 — Deep Packet Inspection
+
+Configuración del perfil `custom-deep-inspection` utilizado para realizar inspección profunda del tráfico SSL/TLS.
+
+![Evidencia 14 - DPI](DOCUMENTACION/Imagenes/image14.png)
+
+### Evidencia 15 — Registro de inspección SSL
+
+Registro generado por FortiGate durante el procesamiento del tráfico HTTPS mediante el perfil de inspección configurado.
+
+![Evidencia 15 - Log DPI](DOCUMENTACION/Imagenes/image15.png)
+
+### Evidencia 16 — Protección contra SQL Injection
+
+Configuración del perfil IPS `SQL-INJECTION-PROTECTION` con la firma utilizada para detectar y bloquear intentos de SQL Injection.
+
+![Evidencia 16 - IPS SQL Injection](DOCUMENTACION/Imagenes/image16.png)
+
+### Evidencia 17 — Detección y bloqueo de SQL Injection
+
+Registro de Intrusion Prevention donde FortiGate identifica el evento `HTTP.URI.SQL.Injection` y aplica la acción de bloqueo.
+
+![Evidencia 17 - SQL Injection bloqueado](DOCUMENTACION/Imagenes/image17.png)
+
+### Evidencia 18 — File Filter para archivos ejecutables
+
+Configuración del perfil `BLOCK-EXE-DOWNLOADS` utilizado para bloquear archivos ejecutables `.exe`.
+
+![Evidencia 18 - File Filter](DOCUMENTACION/Imagenes/image18.png)
+
+### Evidencia 19 — Bloqueo del archivo `prueba.exe`
+
+Página de reemplazo mostrada por FortiGate al bloquear la descarga del archivo ejecutable utilizado durante la prueba.
+
+![Evidencia 19 - EXE bloqueado](DOCUMENTACION/Imagenes/image19.png)
+
+### Evidencia 20 — Registro del archivo bloqueado
+
+Registro de File Filter donde se comprueba el bloqueo de `prueba.exe` con la acción `blocked`.
+
+![Evidencia 20 - Log File Filter](DOCUMENTACION/Imagenes/image20.png)
+
+### Evidencia 21 — Protección DoS
+
+Configuración de la política `PROTECCION-DOS-WEB`, incluyendo la protección `tcp_syn_flood`, acción Block y el umbral establecido.
+
+![Evidencia 21 - Protección DoS](DOCUMENTACION/Imagenes/image21.png)
+
+### Evidencia 22 — VLANs del switch
+
+Verificación de las VLANs configuradas y de los puertos asociados a cada segmento de la red.
+
+![Evidencia 22 - VLANs Switch](DOCUMENTACION/Imagenes/image22.png)
+
+### Evidencia 23 — Enlace trunk
+
+Verificación del enlace trunk utilizado entre el switch y FortiGate para transportar las VLAN 10 y VLAN 20.
+
+![Evidencia 23 - Trunk](DOCUMENTACION/Imagenes/image23.png)
+
+### Evidencia 24 — Port Security
+
+Verificación de Port Security en los puertos de acceso utilizados por los dispositivos del laboratorio.
+
+![Evidencia 24 - Port Security](DOCUMENTACION/Imagenes/image24.png)
+
+### Evidencia 25 — Puertos no utilizados deshabilitados
+
+Verificación del estado de las interfaces del switch, donde se observan los puertos utilizados y los puertos no necesarios deshabilitados administrativamente.
+
+![Evidencia 25 - Puertos deshabilitados](DOCUMENTACION/Imagenes/image25.png)
 
 ---
 

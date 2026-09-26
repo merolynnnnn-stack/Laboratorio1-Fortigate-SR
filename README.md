@@ -61,7 +61,7 @@ La topología está compuesta por:
 
 ### Diagrama de la topología
 
-![Topología de red](DIAGRAMAS/Topologia-Red.png)
+![Topología de red](DOCUMENTACION/Imagenes/image01.png)
 
 > La VLAN 10 utiliza una red /25, mientras que la VLAN 20 utiliza una red /28. El FortiGate funciona como gateway de ambas redes y aplica las políticas de seguridad correspondientes.
 

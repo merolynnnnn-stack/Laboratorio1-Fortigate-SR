@@ -13,7 +13,7 @@
 
 ## Link de la demostración en video
 
-**Enlace del video:** Pendiente de agregar
+[Ver video de demostración](https://youtu.be/nO-5v5NNRUc)
 
 ---
 
